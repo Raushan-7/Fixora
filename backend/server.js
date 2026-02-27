@@ -7,6 +7,10 @@ import authRoutes from './routes/auth.js';
 import bookingRoutes from './routes/bookings.js';
 import contactRoutes from './routes/contact.js';
 import path from "path"
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
