@@ -32,9 +32,7 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/contact', contactRoutes);
 
 
-app.get('/', (req, res) => {
-    res.json({ message: 'Fixora API is running ✅' });
-});
+
 
 
 
@@ -46,6 +44,11 @@ if (process.env.NODE_ENV === "production") {
     app.get("*", (req, res) => {
         res.sendFile(path.join(clientPath, "index.html"));
     });
+}
+else {
+    app.get('/', (req, res) => {
+    res.json({ message: 'Fixora API is running ✅' });
+});
 }
 
 
