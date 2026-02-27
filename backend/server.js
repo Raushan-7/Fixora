@@ -6,6 +6,7 @@ import cors from 'cors';
 import authRoutes from './routes/auth.js';
 import bookingRoutes from './routes/bookings.js';
 import contactRoutes from './routes/contact.js';
+import path from "path"
 
 const app = express();
 
@@ -19,9 +20,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/contact', contactRoutes);
 
-app.get('/', (req, res) => {
-    res.json({ message: 'Fixora2 API is running ✅' });
-});
+
 
 app.use((req, res) => {
     res.status(404).json({ message: 'Route not found' });
@@ -38,9 +37,22 @@ mongoose
     .connect(process.env.MONGO_URI)
     .then(() => {
         console.log(' Connected to MongoDB');
-        app.listen(PORT, () => {
-            console.log(` Server running on http://localhost:${PORT}`);
-        });
+        if(process.env.NODE_ENV==="production"){
+            const clientPath=path.join(__dirname,"../frontend/dist");
+            app.use(express.static(clientPath))
+            app.use((rq,res)=>{
+                res.sendFile(path.join(clientPath,"index.html"))
+            })
+        }
+        else {
+            
+            app.listen(PORT, () => {
+                console.log(` Server running on http://localhost:${PORT}`);
+            });
+            app.get('/', (req, res) => {
+    res.json({ message: 'Fixora2 API is running ✅' });
+});
+        }
     })
     .catch((err) => {
         console.error(' MongoDB connection failed:', err.message);
