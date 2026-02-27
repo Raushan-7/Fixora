@@ -1,0 +1,24 @@
+{
+  "name": "fixora",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd backend && npm install && cd ../frontend && npm install",
+    "build":"cd backend && npm install && cd ../frontend && npm install --include=dev && npm run build",
+    "start":"cd backend && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raushan-7/Fixora.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Raushan-7/Fixora/issues"
+  },
+  "homepage": "https://github.com/Raushan-7/Fixora#readme"
+}
